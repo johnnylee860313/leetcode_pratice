@@ -16,7 +16,7 @@ struct TreeNode* findkthsamllest(struct TreeNode* root,int k,int* count){
     //inorder traversal
     struct TreeNode* next = findkthsamllest(root->left,k,count);
     
-    if(next != NULL) return next;
+    if(next != NULL) return next;//means find the value
     
     if(++(*count) == k) return root;
     printf("%d b\n",*count);
