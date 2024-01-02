@@ -1,5 +1,5 @@
 //find parent
-//DFS, O(n)
+//DFS,O(n)
 class Solution {
 public:
     int minTime(int n, vector<vector<int>>& edges, vector<bool>& hasApple) {
