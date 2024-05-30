@@ -37,3 +37,7 @@ public:
         return false;
     }
 };
+/*
+mp[0] can't be 0, the edge case is [2,4,3],k = 6
+i-mp[sum] can't be >= 1, the edge case is [1,0],k = 2
+*/
