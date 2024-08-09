@@ -14,3 +14,4 @@ public:
 };
 //最大的subarray會是總額減掉最小的
 //(total - globalmin == 0) 代表全是負數的狀況
+//ref 52 or 53
