@@ -1,5 +1,10 @@
 //TC : O(n^2), if using traditional brute force , wuold be O(n^3)
 //SC :O(1)
+/*
+    if the string size is odd then middle-out from the each char
+    if the string size is even then middlde-out from each char and its next one
+    O(n^2),O(1)
+*/
 class Solution {
 public:
     string longestPalindrome(string s) {
@@ -20,7 +25,7 @@ public:
         //update maxstart ,maxlen
         if(right - left - 1 > maxlen){
             maxstart = left + 1;
-            maxlen = right - left - 1;
+            maxlen = right - left - 1;//中間才算確認是回文
         }
     }
 };
