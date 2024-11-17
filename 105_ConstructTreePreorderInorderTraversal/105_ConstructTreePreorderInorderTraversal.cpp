@@ -32,3 +32,27 @@ public:
         return root;
     }
 };
+/*try Non-recur
+ *level order , top down
+ */
+class Solution {
+public:
+    Node* connect(Node* root) {
+        if (!root)return NULL;
+        
+        Node* start = root;
+        Node* cur;
+        
+        while(start->left){//top down
+            cur = start;
+            while(cur){//from left to right
+                cur->left->next = cur->right;
+                if(cur->next)cur->right->next = cur->next->left;
+                cur = cur->next;
+            }
+            start = start->left;
+        }
+        return root;
+    }
+};
+
