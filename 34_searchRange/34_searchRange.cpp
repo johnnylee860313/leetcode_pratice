@@ -32,6 +32,7 @@
 //         return ans;
 //     }
 // };
+
 //O(logn)
 class Solution {
 public:
@@ -51,5 +52,56 @@ public:
             else right = mid-1;
         }
         return left;
+    }
+};
+
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int left = 0;
+        int right = nums.size()-1;
+        vector<int> range(2,-1);
+        if (nums.empty())return range;
+        
+        while(left <= right){
+            int mid = left + (right-left)/2;
+            if(nums[mid] < target)left = mid + 1;
+            else right = mid - 1;
+        }
+        
+        if (right == nums.size()-1 || nums[right+1] != target) return range;
+        range[0] = right+1;
+        
+        left = 0;
+        right = nums.size()-1;
+        
+        while(left <= right){
+            int mid = left + (right-left)/2;
+            if(nums[mid] > target)right = mid - 1;
+            else left = mid + 1;
+        }
+        range[1] = right;
+        
+        return range;
+    }
+};
+
+
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        if (nums.empty())return {-1,-1};
+        int start = firstGreaterEqual(nums, target);
+        if (start == nums.size()-1 || nums[start+1] != target) return {-1, -1};
+        return {start+1, firstGreaterEqual(nums, target + 1)};
+    }
+    int firstGreaterEqual(vector<int>& nums, int target) {
+        int left = 0, right = nums.size()-1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < target) left = mid + 1;
+            else right = mid - 1;
+        }
+        return right;
     }
 };

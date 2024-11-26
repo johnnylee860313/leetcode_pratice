@@ -1,28 +1,28 @@
-// class Solution {
-// public:
-//     vector<vector<int>> merge(vector<vector<int>>& intervals) {
-//        if(intervals.size() == 1)return intervals; 
-//        vector<vector<int>> res;
-//        sort(intervals.begin(),intervals.end(),[](const auto a,const auto b){
-//            return a[0] < b[0];//increasing order by the first number
-//        });
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+       if(intervals.size() == 1)return intervals; 
+       vector<vector<int>> res;
+       sort(intervals.begin(),intervals.end(),[](const auto a,const auto b){
+           return a[0] < b[0];//increasing order by the first number
+       });
 
-//        int i = 0;
-//        while(i < intervals.size()-1){
-//            if(intervals[i][1] >= intervals[i+1][0]){
-//                intervals[i+1][0] = intervals[i][0];
-//                intervals[i+1][1] = max(intervals[i][1],intervals[i+1][1]);
-//            }else{
-//                res.push_back(intervals[i]);
-//            }
-//            i++;
-//        }
+       int i = 0;
+       while(i < intervals.size()-1){
+           if(intervals[i][1] >= intervals[i+1][0]){
+               intervals[i+1][0] = intervals[i][0];
+               intervals[i+1][1] = max(intervals[i][1],intervals[i+1][1]);
+           }else{
+               res.push_back(intervals[i]);
+           }
+           i++;
+       }
 
-//        res.push_back(intervals[i]);
+       res.push_back(intervals[i]);
 
-//        return res;
-//     }
-// };
+       return res;
+    }
+};
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
@@ -42,5 +42,30 @@ public:
             }
         } 
         return res;
+    }
+};
+
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        if (intervals.size() == 1)return {{intervals[0][0], intervals[0][1]}};
+        
+        vector<vector<int>> mergeRange;
+        sort(intervals.begin(),intervals.end());
+        
+        for(int i = 1;i < intervals.size();++i){
+            if (intervals[i][0] <= intervals[i-1][1]){
+                if (intervals[i-1][1] <= intervals[i][1]){
+                    intervals[i][0] = intervals[i-1][0];
+                }else if (intervals[i-1][1] >= intervals[i][1]){
+                    intervals[i][0] = intervals[i-1][0];
+                    intervals[i][1] = intervals[i-1][1];
+                }
+            } else {
+                mergeRange.push_back({intervals[i-1][0],intervals[i-1][1]});
+            }
+        }
+        mergeRange.push_back({intervals[intervals.size()-1][0],intervals[intervals.size()-1][1]});
+        return mergeRange;
     }
 };
